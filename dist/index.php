@@ -13,7 +13,15 @@
 
   <header>
     <div class="container">
-    <img src="img/logo.png" alt="logo" />
+    <div class="logo">
+      <img src="img/logo.png" alt="logo" />
+    </div>
+    <div class="input">
+      <input class="search" type="text" placeholder="Cerca artista...">
+      <button class="cerca">Cerca</button>
+
+    </div>
+      
     </div>
   </header>
 

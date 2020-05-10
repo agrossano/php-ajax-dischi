@@ -1,18 +1,23 @@
-function callApi() {
+function printAlbum(album) {
+  var template = Handlebars.compile($("#template").html());
+  for (var key in album) {
+    var currentAlbum = (album[key]);
+    var context = {
+      poster: currentAlbum.poster,
+      title: currentAlbum.title,
+      author: currentAlbum.author,
+      year: currentAlbum.year
+    };
+    $('.albums').append(template(context))
+  }
+}
+
+
+function apiCall() {
   $.ajax({
-    url: "db.php",
+    url: "api/api.php",
     success: function (data) {
-      for (let key in data) {
-        var album = (data[key]);
-        var template = Handlebars.compile($("#template").html());
-        var context = {
-          poster: album.poster,
-          title: album.title,
-          author: album.author,
-          year: album.year
-        };
-        $('.albums').append(template(context))
-      }
+      printAlbum(data)
     },
     error: function (error) {
       alert('errore');
@@ -21,8 +26,37 @@ function callApi() {
 }
 
 
+function artistFilter() {
+  var SearchedAuthor = $(".search").val();
+  //console.log(author)
+  $.ajax({
+    url: "api/artistfilter.php",
+    method: 'GET',
+    data: {
+      artist: SearchedAuthor
+    },
+    success: function (data) {
+      $('.albums').html('');
+      printAlbum(data);
+
+    },
+    error: function (error) {
+      $('.albums').html('');
+      $('.albums').append('Nessuna corrispondenza')
+    }
+  })
+
+}
+
+
 function init() {
-  callApi();
+  apiCall();
+  $(".cerca").click(artistFilter);
+  $(".input").keypress(function (e) {
+    if (e.which == 13) {
+      artistFilter();
+    };
+  });
 }
 
 $(document).ready(init);

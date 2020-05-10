@@ -2,5 +2,7 @@
     "/dist/app.js": "/dist/app.js",
     "/dist/app.css": "/dist/app.css",
     "/dist/index.php": "/dist/index.php",
-    "/dist/db.php": "/dist/db.php"
+    "/dist/api/db.php": "/dist/api/db.php",
+    "/dist/api/api.php": "/dist/api/api.php",
+    "/dist/api/artistfilter.php": "/dist/api/artistfilter.php"
 }
